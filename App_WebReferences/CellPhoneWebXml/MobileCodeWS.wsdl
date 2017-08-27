@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://WebXml.com.cn/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://WebXml.com.cn/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;a href="http://www.webxml.com.cn/" target="_blank"&gt;WebXml.com.cn&lt;/a&gt; &lt;strong&gt;国内手机号码归属地查询WEB服务&lt;/strong&gt;，提供最新的国内手机号码段归属地数据，每月更新。&lt;br /&gt;使用本站 WEB 服务请注明或链接本站：&lt;a href="http://www.webxml.com.cn/" target="_blank"&gt;http://www.webxml.com.cn/&lt;/a&gt; 感谢大家的支持！&lt;br /&gt;&amp;nbsp;</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://WebXml.com.cn/">
+      <s:element name="getMobileCodeInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mobileCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getMobileCodeInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getMobileCodeInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDatabaseInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="getDatabaseInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDatabaseInfoResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getMobileCodeInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getMobileCodeInfo" />
+  </wsdl:message>
+  <wsdl:message name="getMobileCodeInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getMobileCodeInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDatabaseInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getDatabaseInfo" />
+  </wsdl:message>
+  <wsdl:message name="getDatabaseInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getDatabaseInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMobileCodeInfoHttpGetIn">
+    <wsdl:part name="mobileCode" type="s:string" />
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getMobileCodeInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getDatabaseInfoHttpGetIn" />
+  <wsdl:message name="getDatabaseInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="getMobileCodeInfoHttpPostIn">
+    <wsdl:part name="mobileCode" type="s:string" />
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getMobileCodeInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getDatabaseInfoHttpPostIn" />
+  <wsdl:message name="getDatabaseInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:portType name="MobileCodeWSSoap">
+    <wsdl:operation name="getMobileCodeInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br /&gt;&lt;h3&gt;获得国内手机号码归属地省份、地区和手机卡类型信息&lt;/h3&gt;&lt;p&gt;输入参数：mobileCode = 字符串（手机号码，最少前7位数字），userID = 字符串（商业用户ID） 免费用户为空字符串；返回数据：字符串（手机号码：省份 城市 手机卡类型）。&lt;/p&gt;&lt;br /&gt;</wsdl:documentation>
+      <wsdl:input message="tns:getMobileCodeInfoSoapIn" />
+      <wsdl:output message="tns:getMobileCodeInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDatabaseInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br /&gt;&lt;h3&gt;获得国内手机号码归属地数据库信息&lt;/h3&gt;&lt;p&gt;输入参数：无；返回数据：一维字符串数组（省份 城市 记录数量）。&lt;/p&gt;&lt;br /&gt;</wsdl:documentation>
+      <wsdl:input message="tns:getDatabaseInfoSoapIn" />
+      <wsdl:output message="tns:getDatabaseInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MobileCodeWSHttpGet">
+    <wsdl:operation name="getMobileCodeInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br /&gt;&lt;h3&gt;获得国内手机号码归属地省份、地区和手机卡类型信息&lt;/h3&gt;&lt;p&gt;输入参数：mobileCode = 字符串（手机号码，最少前7位数字），userID = 字符串（商业用户ID） 免费用户为空字符串；返回数据：字符串（手机号码：省份 城市 手机卡类型）。&lt;/p&gt;&lt;br /&gt;</wsdl:documentation>
+      <wsdl:input message="tns:getMobileCodeInfoHttpGetIn" />
+      <wsdl:output message="tns:getMobileCodeInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDatabaseInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br /&gt;&lt;h3&gt;获得国内手机号码归属地数据库信息&lt;/h3&gt;&lt;p&gt;输入参数：无；返回数据：一维字符串数组（省份 城市 记录数量）。&lt;/p&gt;&lt;br /&gt;</wsdl:documentation>
+      <wsdl:input message="tns:getDatabaseInfoHttpGetIn" />
+      <wsdl:output message="tns:getDatabaseInfoHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MobileCodeWSHttpPost">
+    <wsdl:operation name="getMobileCodeInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br /&gt;&lt;h3&gt;获得国内手机号码归属地省份、地区和手机卡类型信息&lt;/h3&gt;&lt;p&gt;输入参数：mobileCode = 字符串（手机号码，最少前7位数字），userID = 字符串（商业用户ID） 免费用户为空字符串；返回数据：字符串（手机号码：省份 城市 手机卡类型）。&lt;/p&gt;&lt;br /&gt;</wsdl:documentation>
+      <wsdl:input message="tns:getMobileCodeInfoHttpPostIn" />
+      <wsdl:output message="tns:getMobileCodeInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDatabaseInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br /&gt;&lt;h3&gt;获得国内手机号码归属地数据库信息&lt;/h3&gt;&lt;p&gt;输入参数：无；返回数据：一维字符串数组（省份 城市 记录数量）。&lt;/p&gt;&lt;br /&gt;</wsdl:documentation>
+      <wsdl:input message="tns:getDatabaseInfoHttpPostIn" />
+      <wsdl:output message="tns:getDatabaseInfoHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MobileCodeWSSoap" type="tns:MobileCodeWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getMobileCodeInfo">
+      <soap:operation soapAction="http://WebXml.com.cn/getMobileCodeInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDatabaseInfo">
+      <soap:operation soapAction="http://WebXml.com.cn/getDatabaseInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MobileCodeWSSoap12" type="tns:MobileCodeWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getMobileCodeInfo">
+      <soap12:operation soapAction="http://WebXml.com.cn/getMobileCodeInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDatabaseInfo">
+      <soap12:operation soapAction="http://WebXml.com.cn/getDatabaseInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MobileCodeWSHttpGet" type="tns:MobileCodeWSHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="getMobileCodeInfo">
+      <http:operation location="/getMobileCodeInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDatabaseInfo">
+      <http:operation location="/getDatabaseInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MobileCodeWSHttpPost" type="tns:MobileCodeWSHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getMobileCodeInfo">
+      <http:operation location="/getMobileCodeInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDatabaseInfo">
+      <http:operation location="/getDatabaseInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MobileCodeWS">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;a href="http://www.webxml.com.cn/" target="_blank"&gt;WebXml.com.cn&lt;/a&gt; &lt;strong&gt;国内手机号码归属地查询WEB服务&lt;/strong&gt;，提供最新的国内手机号码段归属地数据，每月更新。&lt;br /&gt;使用本站 WEB 服务请注明或链接本站：&lt;a href="http://www.webxml.com.cn/" target="_blank"&gt;http://www.webxml.com.cn/&lt;/a&gt; 感谢大家的支持！&lt;br /&gt;&amp;nbsp;</wsdl:documentation>
+    <wsdl:port name="MobileCodeWSSoap" binding="tns:MobileCodeWSSoap">
+      <soap:address location="http://www.webxml.com.cn/WebServices/MobileCodeWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MobileCodeWSSoap12" binding="tns:MobileCodeWSSoap12">
+      <soap12:address location="http://www.webxml.com.cn/WebServices/MobileCodeWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MobileCodeWSHttpGet" binding="tns:MobileCodeWSHttpGet">
+      <http:address location="http://www.webxml.com.cn/WebServices/MobileCodeWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MobileCodeWSHttpPost" binding="tns:MobileCodeWSHttpPost">
+      <http:address location="http://www.webxml.com.cn/WebServices/MobileCodeWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
