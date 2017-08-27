@@ -15,7 +15,7 @@
             <div id="map"></div>
             <div class="interaction-panel">
                 <input type="text" id="iptCode" maxlength="11" class="code" placeholder="Phone number" />
-                <input type="button" value="Lookup" onclick="lookup()" class="btsub" />
+                <input type="button" value="Locate" onclick="lookup()" class="btsub" />
                 <input type="checkbox" checked="checked" id="lock" />
                 <span style="font-size: 10px; font-family: Verdana;">Lock current zoom.</span>
             </div>
